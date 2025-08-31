@@ -1,4 +1,4 @@
-import { TasksService } from "src/tasks.service";
+import { TasksService } from "../src/tasks.service";
 
 describe('TasksService', () => {
   let service: TasksService;
