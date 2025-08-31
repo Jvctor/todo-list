@@ -26,7 +26,6 @@ docker-compose up --build
 ## Scripts úteis
 
 ### Backend
-
 - `npm run start:dev` — inicia o servidor NestJS em modo desenvolvimento
 - `npm run test` — executa os testes unitários
 
@@ -37,6 +36,6 @@ docker-compose up --build
 
 ## Tecnologias
 
-- **Backend:** NestJS, TypeScript
+- **Backend:** NestJS(Nodejs), TypeScript
 - **Frontend:** React, Vite, TypeScript
 - **Containerização:** Docker, Docker Compose
