@@ -17,7 +17,7 @@ export async function createTask(title: string): Promise<Task> {
 }
 
 export async function toggleTaskCompleted(task: Task): Promise<Task> {
-  const res = await fetch(`${API_URL}/${task.id}`, {
+  const res = await fetch(`${API_URL}/${task.id}/done`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ done: !task.done }),
