@@ -4,7 +4,11 @@ import { TasksModule } from './tasks.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(TasksModule);
+  app.enableCors({
+    origin: '*',
+  });
+
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3000);
+  await app.listen(3000, '0.0.0.0');
 }
 bootstrap();
