@@ -1,15 +1,15 @@
+
 import { useEffect, useState } from "react";
 import { fetchTasks, createTask } from "./api/tasks";
-import TaskForm from "./components/TaskForm";
 import { useRef } from "react";
 import TaskList from "./components/TaskList";
 import SearchBar from "./components/SearchBar";
+import { theme } from './theme';
 import type { Task } from "./types";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [search, setSearch] = useState("");
-  const [dark, setDark] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const dialogInputRef = useRef<HTMLInputElement>(null);
   const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -21,11 +21,10 @@ function App() {
 
   const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(search.toLowerCase());
-  
+
     return matchesSearch;
   });
 
-  // Criação de tarefa via modal
   const handleCreate = async () => {
     if (!newTaskTitle.trim()) return;
     setCreating(true);
@@ -40,11 +39,12 @@ function App() {
   };
 
   return (
-    <div className={
-      `min-h-screen flex flex-col items-center justify-start bg-${dark ? 'gray-900' : '[#F7F7F7]'} transition-colors duration-300`
-    }>
+    <div
+      className="min-h-screen flex flex-col items-center justify-start transition-colors duration-300"
+      style={{ background: theme.colors.background }}
+    >
       <header className="w-full flex flex-col items-center mt-8 mb-4">
-        <h1 className="text-2xl font-bold mb-6 tracking-wide text-black" style={{letterSpacing: 1}}>TODO LIST</h1>
+        <h1 className="text-2xl font-bold mb-6 tracking-wide" style={{ color: theme.colors.text, letterSpacing: 1 }}>TODO LIST</h1>
         <div className="flex flex-row items-center gap-2 w-full max-w-3xl">
           <div className="flex-1">
             <SearchBar search={search} setSearch={setSearch} />
@@ -55,8 +55,9 @@ function App() {
         <TaskList tasks={filteredTasks} setTasks={setTasks} />
       </main>
       <button
-        className="fixed bottom-10 right-10 bg-purple-500 hover:bg-purple-600 text-white rounded-full w-14 h-14 flex items-center justify-center text-4xl shadow-lg transition z-20"
+        className="fixed bottom-10 right-10 text-white rounded-full w-14 h-14 flex items-center justify-center text-4xl shadow-lg transition z-20"
         title="Adicionar tarefa"
+        style={{ background: theme.colors.primary, border: 'none' }}
         onClick={() => {
           setShowDialog(true);
           setTimeout(() => dialogInputRef.current?.focus(), 100);
@@ -64,35 +65,60 @@ function App() {
       >
         +
       </button>
-
-      {/* Modal Dialog */}
       {showDialog && (
-        <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-xl shadow-xl p-8 min-w-[340px] max-w-full flex flex-col items-center relative">
-            <h2 className="text-lg font-bold mb-6 text-center">NEW NOTE</h2>
+        <div
+          className="fixed inset-0 z-30 flex items-center justify-center"
+          style={{ background: 'rgba(0,0,0,0.4)' }}
+        >
+          <div
+            className="rounded-xl shadow-xl p-8 min-w-[340px] max-w-full flex flex-col items-center relative"
+            style={{ background: '#fff' }}
+          >
+            <h2 className="text-lg font-bold mb-6 text-center" style={{ color: theme.colors.text }}>Nova Tarefa</h2>
             <input
               ref={dialogInputRef}
-              className="w-full border border-purple-400 rounded px-3 py-2 mb-8 text-purple-700 placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-200 text-base"
-              placeholder="Input your note..."
+              className="w-full rounded px-3 py-2 mb-8 focus:outline-none text-base"
+              placeholder="Digite sua tarefa..."
               value={newTaskTitle}
               onChange={e => setNewTaskTitle(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') handleCreate(); }}
               disabled={creating}
+              style={{
+                border: '1px solid #c4b5fd',
+                color: theme.colors.text,
+                background: theme.colors.background,
+                fontSize: 16,
+                transition: 'box-shadow 0.2s',
+              }}
             />
             <div className="flex w-full justify-between mt-2">
               <button
-                className="border border-purple-400 text-purple-500 px-6 py-2 rounded hover:bg-purple-50 font-semibold"
+                className="px-6 py-2 rounded font-semibold"
+                style={{
+                  border: '1px solid #c4b5fd',
+                  color: theme.colors.primary,
+                  background: 'transparent',
+                }}
                 onClick={() => { setShowDialog(false); setNewTaskTitle(""); }}
                 disabled={creating}
+                onMouseOver={e => (e.currentTarget.style.background = '#faf5ff')}
+                onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
               >
-                CANCEL
+                Cancelar
               </button>
               <button
-                className="bg-purple-500 text-white px-6 py-2 rounded font-semibold hover:bg-purple-600 ml-4 disabled:opacity-60"
+                className="px-6 py-2 rounded font-semibold ml-4 disabled:opacity-60"
+                style={{
+                  background: theme.colors.primary,
+                  color: '#fff',
+                  border: 'none',
+                }}
                 onClick={handleCreate}
                 disabled={creating || !newTaskTitle.trim()}
+                onMouseOver={e => (e.currentTarget.style.background = '#5b54d6')}
+                onMouseOut={e => (e.currentTarget.style.background = theme.colors.primary)}
               >
-                APPLY
+                Adicionar
               </button>
             </div>
           </div>
@@ -100,7 +126,6 @@ function App() {
       )}
     </div>
   );
-  // (função duplicada removida)
 }
 
 export default App;
