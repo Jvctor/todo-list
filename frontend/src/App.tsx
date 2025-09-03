@@ -49,16 +49,6 @@ function App() {
           <div className="flex-1">
             <SearchBar search={search} setSearch={setSearch} />
           </div>
-      
-          <button
-            className="ml-2 p-2 rounded bg-purple-200 hover:bg-purple-300 text-purple-700 text-xl transition"
-            title="Toggle dark mode"
-            onClick={() => setDark(d => !d)}
-          >
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
-            </svg>
-          </button>
         </div>
       </header>
       <main className="w-full max-w-3xl flex flex-col items-center">

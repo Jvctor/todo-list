@@ -1,3 +1,6 @@
+
+import { theme } from '../theme';
+
 interface Props {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
@@ -11,13 +14,24 @@ export default function SearchBar({ search, setSearch }: Props) {
         placeholder="Search note..."
         value={search}
         onChange={e => setSearch(e.target.value)}
-        className="w-full border border-purple-400 rounded-md px-6 py-3 pr-12 bg-white text-purple-500 placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-200 text-base transition"
+        style={{
+          width: '100%',
+          border: `1px solid ${theme.colors.primary}`,
+          borderRadius: 6,
+          padding: '12px 48px 12px 24px',
+          background: theme.colors.inputBg,
+          color: theme.colors.primary,
+          fontSize: 16,
+          outline: 'none',
+          transition: 'box-shadow 0.2s',
+        }}
+        className="pr-12 focus:ring-2"
       />
       <span className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
         <svg
-          className="w-6 h-6 text-purple-400"
+          className="w-6 h-6"
           fill="none"
-          stroke="currentColor"
+          stroke={theme.colors.primary}
           strokeWidth={2}
           viewBox="0 0 24 24"
         >
