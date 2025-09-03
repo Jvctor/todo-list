@@ -7,10 +7,10 @@ interface Props {
 }
 
 export default function TaskList({ tasks, setTasks }: Props) {
-  if (!tasks.length) return <p>Nenhuma tarefa.</p>;
+  if (!tasks.length) return <p className="text-gray-400 text-center mt-8">Nenhuma tarefa.</p>;
 
   return (
-    <ul>
+    <ul className="w-full flex flex-col gap-2">
       {tasks.map(task => (
         <TaskItem key={task.id} task={task} setTasks={setTasks} />
       ))}
