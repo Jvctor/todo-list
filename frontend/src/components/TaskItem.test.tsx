@@ -4,7 +4,6 @@ import TaskItem from '../components/TaskItem';
 import type { Task } from '../types';
 import * as tasksApi from '../api/tasks';
 
-// Mock do módulo da API
 vi.mock('../api/tasks', () => ({
   toggleTaskCompleted: vi.fn(),
 }));

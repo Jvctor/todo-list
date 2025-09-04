@@ -1,7 +1,6 @@
 
 import type { Task } from "../types";
 import { toggleTaskCompleted } from "../api/tasks";
-// import { theme } from '../theme';
 
 interface Props {
   task: Task;

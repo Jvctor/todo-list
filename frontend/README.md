@@ -1,69 +1,93 @@
-# React + TypeScript + Vite
+# TODO List - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web moderna e responsiva para gerenciar tarefas, desenvolvida com React, TypeScript e Tailwind CSS.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 18** - Biblioteca JavaScript para interfaces de usuário
+- **TypeScript** - Superset do JavaScript com tipagem estática
+- **Vite** - Build tool ultra-rápido
+- **Tailwind CSS** - Framework CSS utilitário
+- **Docker** - Containerização da aplicação
 
-## Expanding the ESLint configuration
+## ✨ Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ✅ Interface intuitiva e responsiva
+- 📝 Adicionar novas tarefas
+- ✔️ Marcar tarefas como concluídas
+- 🎨 Design moderno com Tailwind CSS
+- 📱 Totalmente responsivo
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Instalação e Execução
+### Instalação
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Executar a aplicação
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+npm run build
+
 ```
+
+A aplicação estará disponível em `http://localhost:5173`
+
+### Com Docker
+
+```bash
+docker-compose up --build
+```
+
+## 🧪 Testes
+
+```bash
+npm run test
+```
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── api/
+│   ├── config.ts              # Configuração da API
+│   └── tasks.ts               # Serviços da API de tarefas
+├── components/
+│   ├── SearchBar.tsx          # Componente de busca
+│   ├── TaskForm.tsx           # Formulário de tarefas
+│   ├── TaskItem.tsx           # Item individual de tarefa
+│   └── TaskList.tsx           # Lista de tarefas
+├── assets/                    # Imagens e ícones
+├── types.ts                   # Tipos TypeScript
+├── App.tsx                    # Componente principal
+└── main.tsx                   # Ponto de entrada
+```
+
+## 🔧 Configuração
+
+### Variáveis de Ambiente
+
+```env
+VITE_API_URL=http://localhost:3001
+```
+
+## 🐳 Docker
+
+A aplicação pode ser executada em container Docker. O `Dockerfile` está configurado para:
+
+- Usar Node.js 18 Alpine
+- Build otimizado com Vite
+- Expor porta 80
+
+## 📱 Design Responsivo
+
+A aplicação é totalmente responsiva e funciona em:
+
+- 📱 Dispositivos móveis
+- 📱 Tablets
+- 💻 Desktops
+
+## 🎯 Scripts Disponíveis
