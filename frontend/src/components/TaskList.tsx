@@ -1,3 +1,4 @@
+
 import type { Task } from "../types";
 import TaskItem from "./TaskItem";
 
@@ -7,7 +8,7 @@ interface Props {
 }
 
 export default function TaskList({ tasks, setTasks }: Props) {
-  if (!tasks.length) return <p className="text-gray-400 text-center mt-8">Nenhuma tarefa.</p>;
+  if (!tasks.length) return <p className="text-primary text-center mt-8">Nenhuma tarefa.</p>;
 
   return (
     <ul className="w-full flex flex-col gap-2">

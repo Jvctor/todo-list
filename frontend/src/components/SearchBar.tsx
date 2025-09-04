@@ -1,6 +1,4 @@
 
-import { theme } from '../theme';
-
 interface Props {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
@@ -11,27 +9,15 @@ export default function SearchBar({ search, setSearch }: Props) {
     <div className="relative w-full">
       <input
         type="text"
-        placeholder="Search note..."
+        placeholder="Buscar tarefa..."
         value={search}
         onChange={e => setSearch(e.target.value)}
-        style={{
-          width: '100%',
-          border: `1px solid ${theme.colors.primary}`,
-          borderRadius: 6,
-          padding: '12px 48px 12px 24px',
-          background: theme.colors.background,
-          color: theme.colors.text,
-          fontSize: 16,
-          outline: 'none',
-          transition: 'box-shadow 0.2s',
-        }}
-        className="pr-12 focus:ring-2"
+        className="pr-12 focus:ring-2 w-full border border-primary rounded-lg py-3 pl-6 pr-12 bg-white text-primary text-base outline-none transition"
       />
       <span className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
         <svg
-          className="w-6 h-6"
+          className="w-6 h-6 stroke-primary"
           fill="none"
-          stroke={theme.colors.primary}
           strokeWidth={2}
           viewBox="0 0 24 24"
         >

@@ -4,7 +4,6 @@ import { fetchTasks, createTask } from "./api/tasks";
 import { useRef } from "react";
 import TaskList from "./components/TaskList";
 import SearchBar from "./components/SearchBar";
-import { theme } from './theme';
 import type { Task } from "./types";
 
 function App() {
@@ -40,11 +39,10 @@ function App() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-start transition-colors duration-300"
-      style={{ background: theme.colors.background }}
+      className="min-h-screen flex flex-col items-center justify-start transition-colors duration-300 bg-background"
     >
       <header className="w-full flex flex-col items-center mt-8 mb-4">
-        <h1 className="text-2xl font-bold mb-6 tracking-wide" style={{ color: theme.colors.text, letterSpacing: 1 }}>TODO LIST</h1>
+        <h1 className="text-2xl font-bold mb-6 tracking-wide text-primary" style={{ letterSpacing: 1 }}>TODO LIST</h1>
         <div className="flex flex-row items-center gap-2 w-full max-w-3xl">
           <div className="flex-1">
             <SearchBar search={search} setSearch={setSearch} />
@@ -55,9 +53,8 @@ function App() {
         <TaskList tasks={filteredTasks} setTasks={setTasks} />
       </main>
       <button
-        className="fixed bottom-10 right-10 text-white rounded-full w-14 h-14 flex items-center justify-center text-4xl shadow-lg transition z-20"
+        className="fixed bottom-10 right-10 text-white rounded-full w-14 h-14 flex items-center justify-center text-4xl shadow-lg transition z-20 bg-primary border-none hover:bg-primary/80"
         title="Adicionar tarefa"
-        style={{ background: theme.colors.primary, border: 'none' }}
         onClick={() => {
           setShowDialog(true);
           setTimeout(() => dialogInputRef.current?.focus(), 100);
@@ -71,52 +68,30 @@ function App() {
           style={{ background: 'rgba(0,0,0,0.4)' }}
         >
           <div
-            className="rounded-xl shadow-xl p-8 min-w-[340px] max-w-full flex flex-col items-center relative"
-            style={{ background: '#fff' }}
+            className="rounded-xl shadow-xl p-8 min-w-[340px] max-w-full flex flex-col items-center relative bg-white"
           >
-            <h2 className="text-lg font-bold mb-6 text-center" style={{ color: theme.colors.text }}>Nova Tarefa</h2>
+            <h2 className="text-lg font-bold mb-6 text-center text-primary">Nova Tarefa</h2>
             <input
               ref={dialogInputRef}
-              className="w-full rounded px-3 py-2 mb-8 focus:outline-none text-base"
+              className="w-full rounded px-3 py-2 mb-8 focus:outline-none text-base border border-secondary text-primary bg-background transition"
               placeholder="Digite sua tarefa..."
               value={newTaskTitle}
               onChange={e => setNewTaskTitle(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') handleCreate(); }}
               disabled={creating}
-              style={{
-                border: '1px solid #c4b5fd',
-                color: theme.colors.text,
-                background: theme.colors.background,
-                fontSize: 16,
-                transition: 'box-shadow 0.2s',
-              }}
             />
             <div className="flex w-full justify-between mt-2">
               <button
-                className="px-6 py-2 rounded font-semibold"
-                style={{
-                  border: '1px solid #c4b5fd',
-                  color: theme.colors.primary,
-                  background: 'transparent',
-                }}
+                className="px-6 py-2 rounded font-semibold border border-secondary text-primary bg-transparent hover:bg-secondary/10"
                 onClick={() => { setShowDialog(false); setNewTaskTitle(""); }}
                 disabled={creating}
-                onMouseOver={e => (e.currentTarget.style.background = '#faf5ff')}
-                onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
               >
                 Cancelar
               </button>
               <button
-                className="px-6 py-2 rounded font-semibold ml-4 disabled:opacity-60"
-                style={{
-                  background: theme.colors.primary,
-                  color: '#fff',
-                  border: 'none',
-                }}
+                className="px-6 py-2 rounded font-semibold ml-4 disabled:opacity-60 bg-primary text-white border-none hover:bg-primary/80"
                 onClick={handleCreate}
                 disabled={creating || !newTaskTitle.trim()}
-                onMouseOver={e => (e.currentTarget.style.background = '#5b54d6')}
-                onMouseOut={e => (e.currentTarget.style.background = theme.colors.primary)}
               >
                 Adicionar
               </button>

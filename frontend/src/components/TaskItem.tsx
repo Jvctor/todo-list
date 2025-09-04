@@ -1,7 +1,7 @@
 
 import type { Task } from "../types";
 import { toggleTaskCompleted } from "../api/tasks";
-import { theme } from '../theme';
+// import { theme } from '../theme';
 
 interface Props {
   task: Task;
@@ -22,13 +22,10 @@ export default function TaskItem({ task, setTasks }: Props) {
         type="checkbox"
         checked={task.done}
         onChange={handleToggle}
-        className="w-5 h-5 mr-3 cursor-pointer"
-        style={{ accentColor: theme.colors.primary }}
+        className="w-5 h-5 mr-3 cursor-pointer accent-primary"
       />
       <span
-        className={
-          `flex-1 text-lg font-bold select-none ${task.done ? 'line-through text-gray-400' : 'text-black'}`
-        }
+        className={`flex-1 text-lg font-bold select-none ${task.done ? 'line-through text-secondary' : 'text-primary'}`}
       >
         {task.title}
       </span>
