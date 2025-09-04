@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, ParseIntPipe, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Task } from './entities/task.entity';
@@ -8,8 +8,8 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
-  findAll(): Task[] {
-    return this.tasksService.findAll();
+  findAll(@Query('order') order: 'asc' | 'desc' = 'asc'): Task[] {
+    return this.tasksService.findAll(order);
   }
 
   @Post()
@@ -18,7 +18,10 @@ export class TasksController {
   }
 
   @Patch(':id/done')
-  markAsDone(@Param('id', ParseIntPipe) id: number): Task {
-    return this.tasksService.markAsDone(id);
+  markAsDone(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('done') done: boolean
+  ): Task {
+    return this.tasksService.markAsDone(id, done);
   }
 }

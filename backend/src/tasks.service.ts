@@ -7,8 +7,9 @@ export class TasksService {
   private tasks: Task[] = [];
   private nextId = 1;
 
-  findAll(): Task[] {
-    return this.tasks;
+  findAll(order: 'asc' | 'desc' = 'asc'): Task[] {
+    const sorted = [...this.tasks].sort((a, b) => a.id - b.id);
+    return order === 'desc' ? sorted.reverse() : sorted;
   }
 
   create(createTaskDto: CreateTaskDto): Task {
@@ -21,10 +22,10 @@ export class TasksService {
     return task;
   }
 
-  markAsDone(id: number): Task {
+  markAsDone(id: number, done: boolean): Task {
     const task = this.tasks.find((t) => t.id === id);
     if (!task) throw new NotFoundException('Task not found');
-    task.done = true;
+    task.done = done;
     return task;
   }
 }
